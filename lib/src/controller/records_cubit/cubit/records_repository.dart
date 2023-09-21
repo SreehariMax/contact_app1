@@ -13,6 +13,7 @@ class RecordsRepository {
     } catch (ex) {
       return null;
     }
+    return null;
   }
 
   map(RecordModel Function(dynamic item) param0) {}
