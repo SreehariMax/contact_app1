@@ -19,7 +19,7 @@ class RecordsSuccess extends RecordsState {
   RecordsSuccess(this.records);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [records];
 }
 
 class RecordsError extends RecordsState {
