@@ -1,12 +1,12 @@
 class ValidationHelpers {
-  String? checkISNullOrEmpty(String? inputText) {
+  static String? checkISNullOrEmpty(String? inputText) {
     if (inputText == null || inputText.isEmpty || inputText.trim().isEmpty) {
       return "Enter Valid Data";
     }
     return null;
   }
 
-  String? ValidateEmail(String? inputText) {
+  static String? validateEmail(String? inputText) {
     String? nullableEmail = checkISNullOrEmpty(inputText);
     if (nullableEmail != null) {
       return nullableEmail;
@@ -18,9 +18,10 @@ class ValidationHelpers {
     if (!emailValid) {
       return 'Invalid Email';
     }
+    return null;
   }
 
-  String? isValidPassword(String? password) {
+  static String? isValidPassword(String? password) {
     String? nullablePassword = checkISNullOrEmpty(password);
     if (nullablePassword != null) {
       return nullablePassword;
@@ -34,6 +35,5 @@ class ValidationHelpers {
     }
 
     return null;
-
   }
 }

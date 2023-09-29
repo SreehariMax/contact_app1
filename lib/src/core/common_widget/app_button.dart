@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../constants/strings.dart';
-
 class AppButton extends StatelessWidget {
   const AppButton(
       {super.key, required this.buttonTitle, required this.onPressed});
@@ -13,7 +11,7 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         onPressed: () {
-          onPressed;
+          onPressed();
         },
         child: Text(buttonTitle));
   }
