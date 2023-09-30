@@ -4,5 +4,8 @@ class Strings {
   static const String login = "Login";
   static const String newpassword = "New Password";
   static const String confirmpwd = "Confirm Password";
-  static const String uname = "User Name";
+  static const String name = "Name";
+  static const String dob = "Date Of Birth";
+  static const String phone = "Phone Number";
+  static const String signup = "SignUp";
 }

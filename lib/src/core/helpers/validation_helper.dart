@@ -36,4 +36,17 @@ class ValidationHelpers {
 
     return null;
   }
+
+  //Name Validation
+
+  static String? validateName(String? name) {
+    String? nullableName = checkISNullOrEmpty(name);
+    if (nullableName != null) {
+      return (nullableName);
+    }
+    if (name!.length < 3) {
+      return 'Name Must contain atleat 3 characters';
+    }
+    return null;
+  }
 }
