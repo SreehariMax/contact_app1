@@ -1,4 +1,7 @@
+import 'dart:html';
+
 import 'package:contacts_app/src/controller/auth_cubit/cubit/auth_repository.dart';
+import 'package:contacts_app/src/core/network/api_response.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -13,7 +16,8 @@ class AuthCubit extends Cubit<AuthState> {
     AuthRepository authRepository = AuthRepository();
 
     try {
-      if (await authRepository.authenticate(email, password)) {
+      Api_Response apiResponse = await authRepository.login(email, password);
+      if (apiResponse.Status == true) {
         emit(AuthStateAuthenticated(email));
       } else {
         emit(AuthStateAuthenticated("Invalid Credentials"));

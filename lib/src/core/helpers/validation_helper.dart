@@ -49,4 +49,39 @@ class ValidationHelpers {
     }
     return null;
   }
+
+  static String? isConfirmValidPassword(String? password,String? confirmPassword) {
+
+    String? nullablePassword = checkISNullOrEmpty(confirmPassword);
+
+    if (nullablePassword != null && confirmPassword == password) {
+      return nullablePassword;
+    }
+    final bool validPassword =
+        RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+            .hasMatch(password!);
+
+
+    if (!validPassword) {
+      return 'invalid Password';
+    }
+
+    return null;
+  }
+
+   static bool isPhonevalid(String phoneNumber) {
+    final RegExp regex = RegExp(r'^\d{10}$');
+    return (regex.hasMatch(phoneNumber));
+  }
+
+  static String? validatePhone(String? phoneNumber) {
+    bool isValidPhone = isPhonevalid(phoneNumber!);
+    String? nullablePhone = checkISNullOrEmpty(phoneNumber);
+    if (nullablePhone != null) {
+      return nullablePhone;
+    } else if (!isValidPhone) {
+      return 'Enter a valid phone number';
+    }
+    return null;
+  }
 }

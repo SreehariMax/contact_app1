@@ -32,13 +32,15 @@ class _SignUpPageState extends State<SignUpPage> {
                 children: [
                   //Name
                   TextFormField(
-                    controller: unameController,
-                    decoration:
-                        const InputDecoration(label: Text(Strings.name)),
-                    validator: ValidationHelpers.validateName),
+                      keyboardType: TextInputType.name,
+                      controller: unameController,
+                      decoration:
+                          const InputDecoration(label: Text(Strings.name)),
+                      validator: ValidationHelpers.validateName),
 
                   // Email
                   TextFormField(
+                      keyboardType: TextInputType.emailAddress,
                       controller: emailController,
                       decoration:
                           const InputDecoration(label: Text(Strings.email)),
@@ -46,8 +48,24 @@ class _SignUpPageState extends State<SignUpPage> {
 
                   //DOB
                   TextFormField(
+                    keyboardType: TextInputType.datetime,
                     controller: dobController,
+                    validator: ValidationHelpers.checkISNullOrEmpty,
                     decoration: const InputDecoration(label: Text(Strings.dob)),
+                    onTap: () async {
+                      DateTime? selectedDate = await showDatePicker(
+                          context: context,
+                          firstDate: DateTime(1950),
+                          initialDate: DateTime.now()
+                              .subtract(const Duration(days: 18 * 365)),
+                          lastDate: DateTime.now()
+                              .subtract(const Duration(days: 365 * 5)));
+                      if (selectedDate == null) {
+                        selectedDate = DateTime.now()
+                            .subtract(const Duration(days: 365 * 18));
+                      }
+                      dobController.text = selectedDate.toString().substring(0,10);
+                    },
                     // validator: ValidationHelpers.validateEmail
                   ),
 
@@ -58,7 +76,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     controller: phoneController,
                     decoration: const InputDecoration(
                         label: Text(Strings.phone), prefix: Text('+91')),
-                    maxLength: 10,
+                    validator: ValidationHelpers.validatePhone,
                   ),
 
                   //Password
@@ -90,8 +108,11 @@ class _SignUpPageState extends State<SignUpPage> {
                       buttonTitle: Strings.signup,
                       onPressed: () {
                         if (_formKey.currentState?.validate() ?? false) {
-                          String email = emailController.text;
+                          String email = emailController.text.trim();
+                          String name = unameController.text.trim();
                           String password = passwordController.text;
+                          String phone = phoneController.text.trim();
+                          String dob = dobController.text.trim();
                         }
                       },
                     ),
@@ -100,6 +121,4 @@ class _SignUpPageState extends State<SignUpPage> {
               ))),
     );
   }
-
-  
 }
