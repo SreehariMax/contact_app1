@@ -98,6 +98,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       if (passwordController.text != value) {
                         return 'Password dosent match';
                       }
+                      return null;
                     },
                   ),
 

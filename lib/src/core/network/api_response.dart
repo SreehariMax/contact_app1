@@ -1,19 +1,15 @@
-class Api_Response {
+class ApiResponse {
   final bool Status;
-  final dynamic? data;
+  final dynamic data;
   final String? token;
   final String? error;
   final String? msg;
 
-  Api_Response(
-      {required this.Status,
-       this.data,
-       this.token,
-       this.error,
-       this.msg});
+  ApiResponse(
+      {required this.Status, this.data, this.token, this.error, this.msg});
 
-  factory Api_Response.fromJSON(Map<String, dynamic> json) {
-    return Api_Response(
+  factory ApiResponse.fromJSON(Map<String, dynamic> json) {
+    return ApiResponse(
         Status: json['Status'],
         data: json['data'],
         token: json['token'],

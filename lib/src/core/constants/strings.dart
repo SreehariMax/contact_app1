@@ -7,5 +7,5 @@ class Strings {
   static const String name = "Name";
   static const String dob = "Date Of Birth";
   static const String phone = "Phone Number";
-  static const String signup = "SignUp";
+  static const String signup = "Sign Up";
 }

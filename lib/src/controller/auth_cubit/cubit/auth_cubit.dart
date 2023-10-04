@@ -1,4 +1,4 @@
-import 'dart:html';
+// import 'dart:html';
 
 import 'package:contacts_app/src/controller/auth_cubit/cubit/auth_repository.dart';
 import 'package:contacts_app/src/core/network/api_response.dart';
@@ -16,7 +16,7 @@ class AuthCubit extends Cubit<AuthState> {
     AuthRepository authRepository = AuthRepository();
 
     try {
-      Api_Response apiResponse = await authRepository.login(email, password);
+      ApiResponse apiResponse = await authRepository.login(email, password);
       if (apiResponse.Status == true) {
         emit(AuthStateAuthenticated(email));
       } else {

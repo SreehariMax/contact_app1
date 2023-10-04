@@ -1,31 +1,33 @@
-import 'dart:io';
+// import 'dart:io';
+
+import 'dart:convert';
 
 import 'package:contacts_app/src/core/network/api_response.dart';
 import 'package:dio/dio.dart';
 
-class Api_Helper {
-  static final Api_Helper _api_helper = Api_Helper._internal();
+class ApiHelper {
+  static final ApiHelper _api_helper = ApiHelper._internal();
 
-  factory Api_Helper() => _api_helper;
+  factory ApiHelper() => _api_helper;
 
-  Api_Helper._internal();
+  ApiHelper._internal();
 
   final Dio _dio = Dio(BaseOptions(
-    connectTimeout: Duration(seconds: 120),
-    receiveTimeout: Duration(seconds: 120),
+    connectTimeout: const Duration(seconds: 120),
+    receiveTimeout: const Duration(seconds: 120),
     baseUrl: 'http://dducusat.fluttertrainer.in/',
     contentType: 'application/json',
   ));
 
 //for get we nee adress,header as key valuepair and its optional no body required
-  Future<Api_Response> makeGetRequest(String route,
+  Future<ApiResponse> makeGetRequest(String route,
       {Map<String, dynamic>? header, Map<String, dynamic>? queryparams}) async {
     try {
       Response response = await _dio.get(route,
           queryParameters: queryparams, options: Options(headers: header));
-      return Api_Response.fromJSON(response.data);
+      return ApiResponse.fromJSON(response.data);
     } catch (e) {
-      return Api_Response(Status: false, error: 'Something went wrong');
+      return ApiResponse(Status: false, error: 'Something went wrong');
     }
     // if (response.statusCode == HttpStatus.ok) {
     //   Api_Response.fromJSON(response.data);
@@ -33,42 +35,44 @@ class Api_Helper {
   }
 
 //post
-  Future<Api_Response> makePostRequest(String route, Map<String, dynamic> body,
+  Future<ApiResponse> makePostRequest(String route, Map<String, dynamic> body,
       {Map<String, dynamic>? header, Map<String, dynamic>? queryparams}) async {
     try {
       Response response = await _dio.post(route,
-      data: body,
-          queryParameters: queryparams, options: Options(headers: header));
-      return Api_Response.fromJSON(response.data);
+          data: jsonEncode(body),
+          queryParameters: queryparams,
+          options: Options(headers: header));
+      return ApiResponse.fromJSON(response.data);
     } catch (e) {
-      return Api_Response(Status: false, error: 'Something went wrong');
+      return ApiResponse(Status: false, error: 'Something went wrong');
     }
   }
 
 //patch
-  Future<Api_Response> makePatchRequest(String route, Map<String, dynamic> body,
+  Future<ApiResponse> makePatchRequest(String route, Map<String, dynamic> body,
       {Map<String, dynamic>? header, Map<String, dynamic>? queryparams}) async {
     try {
       Response response = await _dio.patch(route,
-      data: body,
-          queryParameters: queryparams, options: Options(headers: header));
-      return Api_Response.fromJSON(response.data);
+          data: jsonEncode(body),
+          queryParameters: queryparams,
+          options: Options(headers: header));
+      return ApiResponse.fromJSON(response.data);
     } catch (e) {
-      return Api_Response(Status: false, error: 'Something went wrong');
+      return ApiResponse(Status: false, error: 'Something went wrong');
     }
   }
 
   //delete
-  Future<Api_Response> makeDeleteRequest(
-      String route, Map<String, dynamic> body,
+  Future<ApiResponse> makeDeleteRequest(String route, Map<String, dynamic> body,
       {Map<String, dynamic>? header, Map<String, dynamic>? queryparams}) async {
     try {
       Response response = await _dio.delete(route,
-      data: body,
-          queryParameters: queryparams, options: Options(headers: header));
-      return Api_Response.fromJSON(response.data);
+          data: body,
+          queryParameters: queryparams,
+          options: Options(headers: header));
+      return ApiResponse.fromJSON(response.data);
     } catch (e) {
-      return Api_Response(Status: false, error: 'Something went wrong');
+      return ApiResponse(Status: false, error: 'Something went wrong');
     }
   }
 }
