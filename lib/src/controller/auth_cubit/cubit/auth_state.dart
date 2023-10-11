@@ -10,6 +10,8 @@ final class AuthStateInitial extends AuthState {
 }
 
 final class AuthStateLoading extends AuthState {
+  AuthStateLoading();
+
   @override
   List<Object> get props => [];
 }

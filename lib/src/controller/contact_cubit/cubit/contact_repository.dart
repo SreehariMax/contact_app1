@@ -9,9 +9,23 @@ class ContactRepository {
     return apiResponse;
   }
 
-  Future<ApiResponse> createNewContact() async {
+  Future<ApiResponse> createNewContact(ContactModel contactModel) async {
     ApiResponse apiResponse =
-        await ApiHelper().makePostRequest("contact",  );
+        await ApiHelper().makePostRequest("contact", contactModel.toJSON());
+
+    return apiResponse;
+  }
+
+  Future<ApiResponse> updateContact(ContactModel contactModel) async {
+    ApiResponse apiResponse = await ApiHelper()
+        .makePatchRequest("contact/${contactModel.id}", contactModel.toJSON());
+
+    return apiResponse;
+  }
+
+  Future<ApiResponse> deleteContact(ContactModel contactModel) async {
+    ApiResponse apiResponse =
+        await ApiHelper().makeDeleteRequest("contact/${contactModel.id}", {});
 
     return apiResponse;
   }
