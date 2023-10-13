@@ -8,4 +8,7 @@ class Strings {
   static const String dob = "Date Of Birth";
   static const String phone = "Phone Number";
   static const String signup = "Sign Up";
+  static const String newUser = "Not Registered Yet?";
+  static const String error = "Authentication Error";
+  static const String ok = "OK";
 }

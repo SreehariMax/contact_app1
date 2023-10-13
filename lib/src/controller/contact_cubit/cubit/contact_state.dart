@@ -4,7 +4,6 @@ abstract class ContactState extends Equatable {
   const ContactState();
 }
 
-
 final class ContactInitial extends ContactState {
   @override
   List<Object> get props => [];
@@ -33,7 +32,6 @@ final class ContactCreateStateError extends ContactState {
 
 //read states
 
-
 final class ContactReadStateInitial extends ContactState {
   @override
   List<Object> get props => [];
@@ -45,13 +43,17 @@ final class ContactReadStateLoading extends ContactState {
 }
 
 final class ContactReadStateSuccess extends ContactState {
+  final List<ContactModel> data;
+  ContactReadStateSuccess({required this.data});
   @override
-  List<Object> get props => [];
+  List<Object> get props => [this.data];
 }
 
 final class ContactReadStateError extends ContactState {
+  final String error;
+  ContactReadStateError({required this.error});
   @override
-  List<Object> get props => [];
+  List<Object> get props => [error];
 }
 
 //update states

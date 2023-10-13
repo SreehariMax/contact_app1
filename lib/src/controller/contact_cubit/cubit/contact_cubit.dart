@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:contacts_app/src/controller/contact_cubit/cubit/contact_repository.dart';
 import 'package:contacts_app/src/core/network/api_response.dart';
 import 'package:contacts_app/src/models/contact_model.dart';
@@ -28,17 +30,20 @@ class ContactCubit extends Cubit<ContactState> {
   }
 
 //Read
-  readContact() async {
+  Future<void> readContact() async {
     emit(ContactReadStateLoading());
     try {
       ApiResponse response = await contactRepository.getAllContacts();
       if (response.Status == true) {
-        emit(ContactReadStateSuccess());
+        List<dynamic> dataRaw = response.data;
+        List<ContactModel> convertData =
+            dataRaw.map((e) => ContactModel.fromJSON(e)).toList();
+        emit(ContactReadStateSuccess(data: convertData));
       } else {
-        emit(ContactReadStateError());
+        emit(ContactReadStateError(error: response.error!));
       }
     } catch (e) {
-      emit(ContactReadStateError());
+      emit(ContactReadStateError(error: "An Error Occured"));
     }
   }
 
@@ -62,7 +67,8 @@ class ContactCubit extends Cubit<ContactState> {
   deleteContact(ContactModel contactModel) async {
     emit(ContactDeleteStateLoading());
     try {
-      ApiResponse response = await contactRepository.deleteContact(contactModel);
+      ApiResponse response =
+          await contactRepository.deleteContact(contactModel);
       if (response.Status == true) {
         emit(ContactDeleteStateSuccess());
       } else {
