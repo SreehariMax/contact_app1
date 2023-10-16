@@ -11,4 +11,7 @@ class Strings {
   static const String newUser = "Not Registered Yet?";
   static const String error = "Authentication Error";
   static const String ok = "OK";
+  static const String contactError = "Something went Wrong";
+  static const String retry = "Retry";
+  static const String btnDelete = "Delete";
 }

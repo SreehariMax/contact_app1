@@ -1,7 +1,7 @@
 // import 'package:contacts_app/src/views/pages/contact_page.dart';
 // import 'package:contacts_app/src/views/pages/widgets/login_page.dart';
-import 'package:contacts_app/src/views/pages/widgets/login_page.dart';
-import 'package:contacts_app/src/views/pages/widgets/signup_page.dart';
+import 'package:contacts_app/src/views/widgets/login_page.dart';
+// import 'package:contacts_app/src/views/pages/widgets/signup_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {

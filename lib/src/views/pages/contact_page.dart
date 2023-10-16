@@ -1,5 +1,5 @@
 import 'package:contacts_app/src/controller/records_cubit/cubit/records_cubit.dart';
-import 'package:contacts_app/src/views/pages/widgets/contact_list_item.dart';
+import 'package:contacts_app/src/views/widgets/contact_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
