@@ -56,8 +56,13 @@ class _NewContactsPageState extends State<NewContactsPage> {
                   return ListTile(
                     title: Text(contacts[index].fname),
                     subtitle: Text(contacts[index].email),
-                    trailing:
-                        IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
+                    trailing: IconButton(
+                        onPressed: () {
+                          context
+                              .read<ContactCubit>()
+                              .deleteContact(contacts[index]);
+                        },
+                        icon: Icon(Icons.delete)),
                   );
                 },
               );
