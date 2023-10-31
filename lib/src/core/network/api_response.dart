@@ -10,7 +10,7 @@ class ApiResponse {
 
   factory ApiResponse.fromJSON(Map<String, dynamic> json) {
     return ApiResponse(
-        Status: json['Status'],
+        Status: json['status'],
         data: json['data'],
         token: json['token'],
         error: json['error'],

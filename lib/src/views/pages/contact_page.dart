@@ -1,4 +1,5 @@
 import 'package:contacts_app/src/controller/records_cubit/cubit/records_cubit.dart';
+import 'package:contacts_app/src/views/pages/add_new_contact.dart';
 import 'package:contacts_app/src/views/widgets/contact_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +15,7 @@ class _ContactPageState extends State<ContactPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       body: BlocProvider(
         create: (context) => RecordsCubit()..getRecordsData(),
         child: SafeArea(child: BlocBuilder<RecordsCubit, RecordsState>(
@@ -37,6 +39,19 @@ class _ContactPageState extends State<ContactPage> {
           },
         )),
       ),
+
+      floatingActionButton:  FloatingActionButton(
+        backgroundColor: const Color(0xff03dac6),
+        foregroundColor: Colors.black,
+        onPressed: () {
+
+        Navigator.push(context, MaterialPageRoute(builder: (context) => AddNewContact()));
+          // Respond to button press
+        },
+        child: Icon(Icons.add),
+      ),
+
+      
     );
   }
 }

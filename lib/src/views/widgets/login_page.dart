@@ -3,6 +3,7 @@ import 'package:contacts_app/src/core/common_widget/app_button.dart';
 import 'package:contacts_app/src/core/constants/strings.dart';
 import 'package:contacts_app/src/core/helpers/validation_helper.dart';
 import 'package:contacts_app/src/core/storage/theme/app_text_theme.dart';
+import 'package:contacts_app/src/views/pages/new_contacts_page.dart';
 import 'package:contacts_app/src/views/widgets/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -64,6 +65,8 @@ class _LoginPageState extends State<LoginPage> {
                             BlocListener<AuthCubit, AuthState>(
                               listener: (context, state) {
                                 if (state is AuthStateAuthenticated) {
+
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => NewContactsPage()));
                                   // TODO: Implement the logic
                                   return;
                                 }

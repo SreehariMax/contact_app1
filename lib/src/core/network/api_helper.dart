@@ -3,7 +3,10 @@
 import 'dart:convert';
 
 import 'package:contacts_app/src/core/network/api_response.dart';
+import 'package:contacts_app/src/core/storage/storage_helper.dart';
+import 'package:contacts_app/src/core/storage/storage_keys.dart';
 import 'package:dio/dio.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class ApiHelper {
   static final ApiHelper _api_helper = ApiHelper._internal();
@@ -18,6 +21,10 @@ class ApiHelper {
     baseUrl: 'http://dducusat.fluttertrainer.in/',
     contentType: 'application/json',
   ));
+
+  initDio(){
+    _dio.interceptors.add(PrettyDioLogger());
+  }
 
 //for get we nee adress,header as key valuepair and its optional no body required
   Future<ApiResponse> makeGetRequest(String route,
@@ -75,4 +82,12 @@ class ApiHelper {
       return ApiResponse(Status: false, error: 'Something went wrong');
     }
   }
+
+
+  Future<Map<String, dynamic>> getEssentialHeaders() async {
+  String? readToken = await StorageHelper().readData(StorageKeys.userToken);
+  if(readToken == null){
+  return  {};
+  }
+  return{"Authorization": "Bearer $readToken"}; }
 }
